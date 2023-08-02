@@ -15,7 +15,7 @@ class Recipe(models.Model):
     myRating = models.CharField('Moja ocena', max_length=3, choices=rating, default='') # choices - the value of this field can be set only to one of the given ones (rating)
     descRecipe = models.TextField('Przepis', blank=True)
     webRecipe = models.URLField('Strona www', max_length=200, blank=True)
-    picRecipe = models.ImageField('Zdjęcie przepisu', blank=True, upload_to='RecipePics')
+    picRecipe = models.ImageField('Zdjęcie przepisu', blank=True, upload_to='recipePics')
     comment = models.TextField('Moje uwagi', blank=True)
     mainComponents = models.TextField('Główne składniki', blank=True)
     createDate = models.DateTimeField(auto_now_add=True)

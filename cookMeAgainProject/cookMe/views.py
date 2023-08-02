@@ -7,4 +7,4 @@ def home(request):
 
 def postRecipe(request):
     postRecipes = Recipe.objects.all().order_by('-createDate') # objects - fetches all objects from the database
-    return render(request, 'postRecipe.html', {'post':postRecipes})
+    return render(request, 'postRecipe.html', {'postRecipes':postRecipes})

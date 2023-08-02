@@ -1,1 +1,11 @@
-{{post}}
+{% for postRecipe in postRecipes %}
+    {{postRecipe.title}}
+    {{postRecipe.createDate}}
+    {{postRecipe.webRecipe}}
+  
+    {% if postRecipe.dishPicture %}
+        <image src ='{{postRecipe.dishPicture.url}}' alt='photo'>
+    {% else %}
+        <p>brak zdjęcia</p>
+    {% endif %}
+{% endfor %}
