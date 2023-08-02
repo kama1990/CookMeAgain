@@ -12,12 +12,12 @@ class Recipe(models.Model):
         ('mod', 'Do modyfikacji'),
 
     ]
-    myRating = models.CharField(max_length=3, choices=rating, default='') # choices - the value of this field can be set only to one of the given ones (rating)
-    descRecipe = models.TextField(blank=True)
-    webRecipe = models.URLField(max_length=200, blank=True)
-    picRecipe = models.ImageField(blank=True)
-    comment = models.TextField(blank=True)
-    mainComponets = models.TextField(blank=True)
+    myRating = models.CharField('Moja ocena', max_length=3, choices=rating, default='') # choices - the value of this field can be set only to one of the given ones (rating)
+    descRecipe = models.TextField('Przepis', blank=True)
+    webRecipe = models.URLField('Strona www', max_length=200, blank=True)
+    picRecipe = models.ImageField('Zdjęcie przepisu', blank=True, upload_to='RecipePics')
+    comment = models.TextField('Moje uwagi', blank=True)
+    mainComponets = models.TextField('Główne składniki', blank=True)
     createDate = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
