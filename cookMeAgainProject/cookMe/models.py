@@ -17,7 +17,7 @@ class Recipe(models.Model):
     webRecipe = models.URLField('Strona www', max_length=200, blank=True)
     picRecipe = models.ImageField('Zdjęcie przepisu', blank=True, upload_to='RecipePics')
     comment = models.TextField('Moje uwagi', blank=True)
-    mainComponets = models.TextField('Główne składniki', blank=True)
+    mainComponents = models.TextField('Główne składniki', blank=True)
     createDate = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
