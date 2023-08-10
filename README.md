@@ -1,4 +1,7 @@
 # CookMeAgain
+<p algin="center">
+This is a final project of Python bootcamp from Software Development Academy (SDA). This is a Django-basted website project which allow to relax and de-stress after a hard day at work. Actually, website consists of two individuals apps, each serving a specific purpose.
+</p>
 ## My preparations 
 * As a user I want to ...
 
