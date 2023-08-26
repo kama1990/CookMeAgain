@@ -6,5 +6,13 @@ def home(request):
     return render(request, 'home.html')
 
 def postRecipe(request):
-    postRecipes = Recipe.objects.all().order_by('-createDate') # objects - fetches all objects from the database
+    postRecipes = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
     return render(request, 'postRecipe.html', {'postRecipes':postRecipes})
+
+def upload(request):
+    if request.method == "POST":
+        pic_recipes = request.FILES.getlist('pic_recipe')
+        for pic_recipe in pic_recipes:
+            Recipe.objects.create(pic_recipes=pic_recipe)
+    pic_recipes = Recipe.objects.all()
+    return render(request, 'postRecipe.html', {'pic_recipes': pic_recipe})
