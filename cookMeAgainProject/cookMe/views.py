@@ -5,7 +5,7 @@ from .models import Recipe
 def home(request):
     return render(request, 'home.html')
 
-def postRecipe(request):
+def post_recipe(request):
     postRecipes = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
     return render(request, 'postRecipe.html', {'postRecipes':postRecipes})
 
