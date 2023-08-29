@@ -61,7 +61,7 @@ input, textarea {
     background:#ededed;
     border:0;
     padding:6px 10px;
-    font-size:12px;
+    font-size:25px;
 }
 input[type=submit] {
     font-weight:bold;

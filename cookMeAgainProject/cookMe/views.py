@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import send_mail
 from .models import Recipe
+from .forms import EmailPostForm
+from cookMeAgain.settings import EMAIL_HOST_USER
 
 # Create your views here.
 def home(request):
@@ -30,6 +33,31 @@ def post_detail(request, id):
     return render(request,
                   'post/post_detail.html',
                   {'post':post})
+
+def post_share(request, post_id):
+    post = get_object_or_404(Recipe, id=post_id)
+    sent = False
+    if request.method == 'POST':
+        # the form was sent
+        form = EmailPostForm(request.POST)
+        if form.is_valid():
+            # form is valid
+            cd = form.cleaned_data # if something went wrong, cd will contain only correct info'
+            # .. sent email
+            post_url = request.build_absolute_uri(
+                post.get_absolute_url())
+            subject = f"Użytkownik {cd['name']} udostępnił Ci przepis {post.title}"
+            message = f"Sprawdź {post.title} pod adresem {post_url}\n\n" \
+                      f"Wiadomość od użytkownika {cd['name']}: {cd['comments']}"
+            send_mail(subject, message, EMAIL_HOST_USER, [cd['to']])
+            sent = True
+    else:
+        form = EmailPostForm()   
+    return render(request,
+                  'post/share.html',
+                  {'post':post,
+                   'form':form,
+                   'sent':sent})
 
 def upload(request):
     if request.method == "POST":

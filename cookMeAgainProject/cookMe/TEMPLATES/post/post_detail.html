@@ -19,5 +19,7 @@
     <p>{{post.pic_recipe}}</p>
     <p>{{post.comment}}</p>
     <p>{{post.main_components}}</p>
+    <p>
+        <a href="{% url 'post_share' post.id %}">Udostępnij mój przepis</a>
 {% endblock content %}
     

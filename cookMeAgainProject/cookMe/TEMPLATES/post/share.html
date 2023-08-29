@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Udostępnij mój przepis{% endblock title %}
+
+{% block content %}
+    {% if sent %}
+        <h1>Wiadomość email została poprawnie wysłana</h1>
+        <p>
+            Wysłanie przepisu {{ post.title }} do {{ form.cleaned_data.to }} zakończyło się sukcesem.
+        </p>
+    {% else %}
+        <h1>Udostępnij {{ post.title }} przez e-mail</h1>
+        <form method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Wyślij wiadomość e-mail">
+        </form>
+    {% endif %}
+{% endblock content %}
+    
