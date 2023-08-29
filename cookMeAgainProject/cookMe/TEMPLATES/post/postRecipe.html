@@ -5,18 +5,19 @@
 
 {% block content %}
     <h1>Moje przepisy</h1>  
-    {% for postRecipe in postRecipes %}
+    {% for post in posts %}
         <h2>
-            <a href="{% url 'post_detail' postRecipe.id %}">{{postRecipe.title}}</a> 
+            <a href="{% url 'post_detail' post.id %}">{{post.title}}</a> 
         </h2>
         <p class="date">
-            Dodany {{postRecipe.create_date}}
+            Dodany {{post.create_date}}
         </p>
-        {{postRecipe.my_rating}}
-        {% if postRecipe.dish_picture %}
-            <image src ='{{postRecipe.dish_picture.url}}' alt='photo'>
+        {{post.my_rating}}
+        {% if post.dish_picture %}
+            <image src ='{{post.dish_picture.url}}' alt='photo'>
         {% else %}
             <p>brak zdjęcia</p>
         {% endif %}
-    {% endfor %} 
+    {% endfor %}
+    {% include 'pagination.html' with page=posts %}
 {% endblock content %} 

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Recipe
 
 # Create your views here.
@@ -6,10 +7,22 @@ def home(request):
     return render(request, 'home.html')
 
 def post_recipe(request):
-    postRecipes = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
+    post_recipe = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
+    paginator = Paginator(post_recipe,3) # 5 recipes on 1 page
+    page_number = request.GET.get('page', 1)
+    try:
+        posts = paginator.page(page_number)
+    except PageNotAnInteger:
+        # if page_number is not integer
+        # shows first page
+        posts = paginator.page(1)
+    except EmptyPage:
+        # if page_number will not exist
+        # shows last page
+        posts = paginator.page(paginator.num_pages)
     return render(request,
                   'post/postRecipe.html',
-                  {'postRecipes':postRecipes})
+                  {'posts':posts})
 
 def post_detail(request, id):
     post = get_object_or_404(Recipe,
