@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Moje przepisy{% endblock title %}
+
+
+{% block content %}
+    <h1>Moje przepisy</h1>  
+    {% for postRecipe in postRecipes %}
+        <h2>
+            <a href="{% url 'post_detail' postRecipe.id %}">{{postRecipe.title}}</a> 
+        </h2>
+        <p class="date">
+            Dodany {{postRecipe.create_date}}
+        </p>
+        {{postRecipe.my_rating}}
+        {% if postRecipe.dish_picture %}
+            <image src ='{{postRecipe.dish_picture.url}}' alt='photo'>
+        {% else %}
+            <p>brak zdjęcia</p>
+        {% endif %}
+    {% endfor %} 
+{% endblock content %} 

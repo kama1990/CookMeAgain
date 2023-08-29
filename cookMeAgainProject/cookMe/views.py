@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Recipe
 
 # Create your views here.
@@ -7,7 +7,16 @@ def home(request):
 
 def post_recipe(request):
     postRecipes = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
-    return render(request, 'postRecipe.html', {'postRecipes':postRecipes})
+    return render(request,
+                  'post/postRecipe.html',
+                  {'postRecipes':postRecipes})
+
+def post_detail(request, id):
+    post = get_object_or_404(Recipe,
+                             id=id)
+    return render(request,
+                  'post/post_detail.html',
+                  {'post':post})
 
 def upload(request):
     if request.method == "POST":

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %} {{post.title}} {% endblock title %}
+
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p class="date">
+        Opublikowany {{post.create_date}}
+    </p>
+    {% if post.dish_picture %}
+        <image src ='{{post.dish_picture.url}}' alt='photo' width="50%"></image>
+    {% else %}
+        <p>brak zdjęcia</p>
+    {% endif %}
+    <p>{{post.my_rating}}</p>
+    <p>{{post.desc_recipe}}</p>
+    <p><a href="{{post.web_recipe}}" target="_blank">{{post.web_recipe}}<a></p>
+    <p>{{post.pic_recipe}}</p>
+    <p>{{post.comment}}</p>
+    <p>{{post.main_components}}</p>
+{% endblock content %}
+    
