@@ -87,6 +87,31 @@ def delete_recipe(request, post_id):
     return render(request,
                   'post/delete.html')
 
+def edit_recipe(request, post_id):
+    # Use get() to return an object, or raise a Http404 exception if the object does not exist.
+    post = get_object_or_404(Recipe,
+                            id=post_id,
+                            user=request.user)
+    if request.method == 'GET':
+        form = RecipePostForm(instance=post)
+        return render(request,
+                      'post/edit_recipe.html',
+                      {'form':form,
+                       'post':post})
+    else:
+        # we want to fillin RecipePostForm for exist post , user is there  /  user jest zaciagny z instancji/
+        form = RecipePostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_recipe')
+        else:
+            error = "Coś poszło nie tak, spróbuj raz jeszcze"
+            return render(request,
+                          'post/edit_recipe.html',
+                          {'post':post,
+                           'form':form,
+                           'error':error})
+
 def upload(request):
     if request.method == "POST":
         pic_recipes = request.FILES.getlist('pic_recipe')
