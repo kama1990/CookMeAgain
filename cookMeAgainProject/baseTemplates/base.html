@@ -13,8 +13,8 @@
         {% endblock content %}
     </div>
     <div id="sidebar">
-        <h2>Moje przepisy</h2>
-        <p>To są moje przepisy</p>
+        <h2><a href="{% url 'post_recipe' %}">Moje przepisy</a></h2>
+        <h2><a href="{% url 'create_new_recipe' %}">Dodaj nowy przepis</a></h2>
     </div>
 </body>
 </html>

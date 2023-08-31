@@ -1,4 +1,5 @@
 from django import forms
+from .models import Recipe
 
 class EmailPostForm(forms.Form):
     name = forms.CharField(label='Użytkownik',max_length=40)
@@ -8,3 +9,9 @@ class EmailPostForm(forms.Form):
                                required=False,
                                widget=forms.Textarea)
     
+
+class RecipePostForm(forms.ModelForm):
+
+    class Meta:
+        model = Recipe
+        exclude = ('create_date', 'user')

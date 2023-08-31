@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 from .models import Recipe
-from .forms import EmailPostForm
+from .forms import EmailPostForm, RecipePostForm
 from cookMeAgain.settings import EMAIL_HOST_USER
 
 # Create your views here.
@@ -58,6 +58,26 @@ def post_share(request, post_id):
                   {'post':post,
                    'form':form,
                    'sent':sent})
+
+def create_new_recipe(request):
+    if request.method == 'GET': # When used GET method eg. web loading, create empty creation form
+        return render(request,
+                      'post/create_new_recipe.html',
+                      {'form':RecipePostForm()})
+    else:
+        form = RecipePostForm(request.POST, request.FILES)
+        # create RecipePostForm and fill it with request data, request.FILES are neccesery for image which user would like to upload
+        if form.is_valid(): # if data is valid
+            post = form.save(commit=False) # create post but it will be not save yet
+            post.user = request.user # we have to add user
+            post.save() # no, we can save
+            return redirect('post_recipe')
+        else: # if something went wrong
+            error = "Coś poszło nie tak"
+            return render(request,
+                          'post/create_new_recipe.html',
+                          {'form': RecipePostForm(),
+                           'error':error})
 
 def upload(request):
     if request.method == "POST":
