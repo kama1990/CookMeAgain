@@ -1,5 +1,21 @@
-<form method="post">
-    {{ form.as_p }}
-    {% csrf_token %}
-    <input type="submit" value="Zapisz">
-</form>
+{% extends 'base.html' %}
+
+{% block title %}Edycja przepisu{% endblock title %}
+    
+
+{% block content %}
+    <h2>{{post.title}}</h2>
+
+    {% if post.dish_picture %}
+        <img src="{{post.dish_picture.url}}" alt="photo" style="width: 200px">
+    {% endif %}
+    {% if post.pic_recipe %}
+        <img src="{{post.dpic_recipe.url}}" alt="photo" style="width: 200px">
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Zapisz">
+    </form>    
+{% endblock content %}
+    

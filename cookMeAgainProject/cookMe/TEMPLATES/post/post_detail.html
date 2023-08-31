@@ -16,7 +16,9 @@
     <p>{{post.my_rating}}</p>
     <p>{{post.desc_recipe}}</p>
     <p><a href="{{post.web_recipe}}" target="_blank">{{post.web_recipe}}<a></p>
-    <p>{{post.pic_recipe}}</p>
+    {% if post.pic_recipe %}
+        <image src ='{{post.pic_recipe.url}}' alt='photo' width="50%"></image>
+    {% endif %}
     <p>{{post.comment}}</p>
     <p>{{post.main_components}}</p>
     <p><a href="{% url 'edit_recipe' post.id %}">Edytuj przepis</a></p>
