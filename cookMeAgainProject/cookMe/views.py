@@ -11,6 +11,7 @@ def home(request):
 
 def post_recipe(request):
     post_recipe = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
+    amount_of_all_recipes = Recipe.objects.all().count()
     paginator = Paginator(post_recipe,3) # 5 recipes on 1 page
     page_number = request.GET.get('page', 1)
     try:
@@ -25,7 +26,7 @@ def post_recipe(request):
         posts = paginator.page(paginator.num_pages)
     return render(request,
                   'post/postRecipe.html',
-                  {'posts':posts})
+                  {'amount_of_all_recipes':amount_of_all_recipes,'posts':posts})
 
 def post_detail(request, id):
     post = get_object_or_404(Recipe,

@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
-
+{% load pluralize_pl %}
 {% block title %}Moje przepisy{% endblock title %}
 
-
 {% block content %}
-    <h1>Moje przepisy</h1>  
+
+    <h1>Moje przepisy</h1>
+    <h1>Masz już {{ amount_of_all_recipes }} {{ amount_of_all_recipes | pluralize_pl:"przepis,przepisów,przepisy" }}</h1>
     {% for post in posts %}
         <h2>
             <a href="{% url 'post_detail' post.id %}">{{post.title}}</a> 
@@ -19,5 +20,7 @@
             <p>brak zdjęcia</p>
         {% endif %}
     {% endfor %}
+    
+
     {% include 'pagination.html' with page=posts %}
 {% endblock content %} 
