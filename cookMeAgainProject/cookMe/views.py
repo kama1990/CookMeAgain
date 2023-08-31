@@ -78,6 +78,14 @@ def create_new_recipe(request):
                           'post/create_new_recipe.html',
                           {'form': RecipePostForm(),
                            'error':error})
+        
+def delete_recipe(request, post_id):
+    post = get_object_or_404(Recipe,
+                             id=post_id,
+                             user=request.user)
+    post.delete()
+    return render(request,
+                  'post/delete.html')
 
 def upload(request):
     if request.method == "POST":
