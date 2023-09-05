@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
-from .models import Recipe
+from .models import Recipe, Category
 from .forms import EmailPostForm, RecipePostForm
 from cookMeAgain.settings import EMAIL_HOST_USER
 
@@ -10,6 +10,8 @@ def home(request):
     return render(request, 'home.html')
 
 def post_recipe(request):
+    category = None
+    categories = Category.objects.all()
     post_recipe = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
     amount_of_all_recipes = Recipe.objects.all().count()
     paginator = Paginator(post_recipe,3) # 5 recipes on 1 page
@@ -26,7 +28,9 @@ def post_recipe(request):
         posts = paginator.page(paginator.num_pages)
     return render(request,
                   'post/postRecipe.html',
-                  {'amount_of_all_recipes':amount_of_all_recipes,'posts':posts})
+                  {'category':category,
+                   'categories':categories,
+                   'amount_of_all_recipes':amount_of_all_recipes,'posts':posts})
 
 def post_detail(request, id):
     post = get_object_or_404(Recipe,

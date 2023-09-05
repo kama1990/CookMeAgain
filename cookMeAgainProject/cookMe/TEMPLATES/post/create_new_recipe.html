@@ -2,16 +2,15 @@
 
 {% block title %}Nowy przepis{% endblock title %}
 {% block content %}
-<h2>Stwórz nowy przepis</h2>
-    
-{% if error %}
-    <h1>{{error}}</h1>
-{% endif %}
-    
-<form enctype="mulipart/form-data" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-<button type="submit">Dodaj przepis</button>
-</form>  
+    <h2>Stwórz nowy przepis</h2>
+        
+    {% if error %}
+        <h1>{{error}}</h1>
+    {% endif %}
+        
+    <form enctype="mulipart/form-data" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Dodaj przepis"></input>
+    </form>  
 {% endblock content %}
-    
