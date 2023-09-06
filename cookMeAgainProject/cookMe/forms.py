@@ -14,4 +14,4 @@ class RecipePostForm(forms.ModelForm):
 
     class Meta:
         model = Recipe
-        exclude = ('create_date', 'user')
+        exclude = ('slug','create_date', 'user')

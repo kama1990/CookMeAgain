@@ -1,37 +1,122 @@
-body { 
+@import url(//fonts.googleapis.com/css?family=Ubuntu);
+
+body {
     margin:0;
     padding:0;
-    font-family:helvetica, sans-serif; 
+    font-family:helvetica, sans-serif;
 }
 
-a { 
-    color:#00abff;
-    text-decoration:none; 
+h1, h2, h3, h4, h5 , h6 {
+    font-family: 'Ubuntu', sans-serif; font-weight:normal;
 }
 
-h1 { 
-    font-weight:normal;
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
+a {
+    text-decoration:none;
+    color:#5993bb;
 }
 
-h2 {
-    font-weight:normal;
-    margin:30px 0 0;
+a:hover {
+    color:#77b6e2;
 }
 
-#content { 
+a.button, input[type="submit"] {
+    color:#fff;
+    background:#5993bb;
+    border-radius:4px;
+    padding:10px 20px;
+    font-size:14px;
+    border:0;
+}
+
+a.button.light {
+    color:#666;
+    background:#ededed;
+}
+
+form p label, form p input {
     float:left;
-    width:60%;
-    padding:0 0 0 30px; 
+    clear:both;
 }
 
-#sidebar { 
-    float:right;
-    width:30%;
-    padding:10px;
-    background:#efefef; 
-    height:100%;
+form p label {
+    font-size:14px;
+    padding-bottom:4px;
+}
+
+form p input {
+    width:300px;
+    font-size:13px;
+    margin-bottom:10px;
+    padding:10px 12px;
+    border:0;
+    background:#efefef;
+    color:#666;
+    border-radius:4px;
+}
+
+ul.errorlist {
+   float:left;
+   color:#ff0000;
+   clear:both;
+   font-size:13px;
+   margin:0 0 0 10px;
+   padding:10px 0;
+}
+
+
+#header {
+    padding:10px 100px;
+    font-size:18px;
+    overflow:auto;
+}
+
+#subheader {
+    background:#ececec;
+    color:#444;
+    padding:15px 100px;
+    overflow:auto;
+}
+
+#content {
+    padding:0 100px;
+    overflow:hidden;
+}
+
+#sidebar {
+    width:220px;
+    padding:30px 20px 0 0;
+    float:left;
+}
+
+#sidebar ul{
+    margin:0;
+    padding:0;
+}
+
+#sidebar ul li {
+    margin:0;
+    list-style:none;
+    padding:10px 14px;
+}
+
+#sidebar ul li a {
+    display:block;
+}
+
+#sidebar ul li.selected {
+    background:#5993bb;
+    border-radius:4px;
+}
+
+#sidebar ul li.selected a {
+    color:#fff;
+}
+
+#main {
+    float:left;
+    width: 96%;
+    margin-right:-220px;
+    overflow:hidden;
 }
 
 p.date { 
@@ -41,52 +126,57 @@ p.date {
     font-style: italic; 
 }
 
-/* pagination */
 .pagination { 
     margin:40px 0; 
     font-weight:bold;
 }
 
-/* forms */
-label { 
+.recipe-list .item {
+    width:25%;
+    padding:10px 20px 10px 0;
     float:left;
-    clear:both;
-    color:#333;
-    margin-bottom:4px; 
-}
-input, textarea { 
-    clear:both;
-    float:left;
-    margin:0 0 10px;
-    background:#ededed;
-    border:0;
-    padding:6px 10px;
-    font-size:25px;
-}
-input[type=submit] {
-    font-weight:bold;
-    background:#00abff;
-    color:#fff;
-    padding:10px 20px;
-    font-size:14px;
-    text-transform:uppercase; 
-}
-.errorlist { 
-    color:#cc0033;
-    float:left;
-    clear:both;
-    padding-left:10px; 
+    text-align:center;
+    line-height:1.2;
 }
 
-/* comments */
-.comment {
-    padding:10px;
+.recipe-list .item img {
+    width:100%;
+    margin-bottom:8px;
 }
-.comment:nth-child(even) {
-    background:#efefef;
+
+.recipe-detail {
+    text-align:justify;
 }
-.comment .info {
+
+.recipe-detail .rating {
+    color:#333;
+    font-size:28px;
     font-weight:bold;
-    font-size:12px;
+}
+
+.recipe-detail img {
+    width:40%;
+    float:left;
+    padding:0 20px 20px 0;
+}
+
+.recipe-detail h1 {
+    margin-bottom:0;
+}
+
+.recipe-detail h2 {
+    margin-top:10px;
+}
+/* braintree hosted fields */
+form div.field {
+    font-size:13px;
     color:#666;
+    width:300px;
+    height:22px;
+    margin-bottom:10px;
+    padding:6px 12px;
+    border:0;
+    background:#efefef;
+    color:#666;
+    border-radius:4px;
 }

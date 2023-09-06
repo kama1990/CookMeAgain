@@ -9,7 +9,7 @@ from cookMeAgain.settings import EMAIL_HOST_USER
 def home(request):
     return render(request, 'home.html')
 
-def post_recipe(request):
+def post_recipe(request, category_slug=None):
     category = None
     categories = Category.objects.all()
     post_recipe = Recipe.objects.all().order_by('-create_date') # objects - fetches all objects from the database
@@ -26,15 +26,21 @@ def post_recipe(request):
         # if page_number will not exist
         # shows last page
         posts = paginator.page(paginator.num_pages)
+    if category_slug:
+        category = get_object_or_404(Category,
+                                     slug=category_slug)
+        post_recipe = post_recipe.filter(category=category)
     return render(request,
                   'post/postRecipe.html',
                   {'category':category,
                    'categories':categories,
+                   'post_recipe':post_recipe,
                    'amount_of_all_recipes':amount_of_all_recipes,'posts':posts})
 
-def post_detail(request, id):
+def post_detail(request, id, slug):
     post = get_object_or_404(Recipe,
-                             id=id)
+                             id=id,
+                             slug=slug)
     return render(request,
                   'post/post_detail.html',
                   {'post':post})

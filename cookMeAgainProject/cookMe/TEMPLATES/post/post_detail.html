@@ -1,28 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} {{post.title}} {% endblock title %}
 
-
 {% block content %}
+<div class="recipe-detail">
+    <img src="{% if post.dish_picture %}{{ post.dish_picture.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
     <h1>{{ post.title }}</h1>
-    <h2>{{ post.category }}</h2>
-    <p class="date">
-        Opublikowany {{post.create_date}}
-    </p>
-    {% if post.dish_picture %}
-        <image src ='{{post.dish_picture.url}}' alt='photo' width="50%"></image>
-    {% else %}
-        <p>brak zdjęcia</p>
-    {% endif %}
-    <p>{{post.my_rating}}</p>
-    <p>{{post.desc_recipe}}</p>
-    <p><a href="{{post.web_recipe}}" target="_blank">{{post.web_recipe}}<a></p>
+    <h2>
+        <a href="{{ post.category.get_absolute_url }}">{{ post.category }}</a>
+    </h2>
+    <p class="rating">{{post.my_rating}}</p>
+    <p class="date">Opublikowany {{post.create_date}}</p>
+    <h3>Przepis:</h3>{{post.desc_recipe}}
+</div>
+
+<h3>Strona www:</h3><a href="{{post.web_recipe}}" target="_blank">{{post.web_recipe}}</a>
+<h3>Zdjęcia przepisu</h3>
     {% if post.pic_recipe %}
-        <image src ='{{post.pic_recipe.url}}' alt='photo' width="50%"></image>
+    <image src ='{{post.pic_recipe.url}}' alt='photo' width="50%"></image>
     {% endif %}
-    <p>{{post.comment}}</p>
-    <p>{{post.main_components}}</p>
-    <p><a href="{% url 'edit_recipe' post.id %}">Edytuj przepis</a></p>
-    <p><a href="{% url 'post_share' post.id %}">Udostępnij mój przepis</a></p>
-    <a href="{% url 'delete_recipe' post.id %}">Usuń przepis</a>
+<br>
+<h3>Mój komentarz:</h3>{{post.comment}}
+<h3>Główne składniki:</h3>{{post.main_components}}
+
+<p><a href="{% url 'edit_recipe' post.id %}">Edytuj przepis</a></p>
+<p><a href="{% url 'post_share' post.id %}">Udostępnij mój przepis</a></p>
+<a href="{% url 'delete_recipe' post.id %}">Usuń przepis</a>
 {% endblock content %}

@@ -4,17 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock title %}</title>
+    <title>{% block title %}Moje Przepisy{% endblock title %}</title>
     <link href="{% static 'css/cookMe.css' %}" rel="stylesheet">
 </head>
 <body>
+    <div id="header">
+        <a href="{% url 'post_recipe' %}">Moje przepisy</a>
+    </div>
+    <div id="subheader">
+        <a href="{% url 'create_new_recipe' %}">Dodaj nowy przepis</a>
+    </div>
     <div id="content">
         {% block content %}
         {% endblock content %}
-    </div>
-    <div id="sidebar">
-        <h2><a href="{% url 'post_recipe' %}">Moje przepisy</a></h2>
-        <h2><a href="{% url 'create_new_recipe' %}">Dodaj nowy przepis</a></h2>
     </div>
 </body>
 </html>
