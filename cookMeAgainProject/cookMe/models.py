@@ -21,9 +21,17 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
+    def save(self, *args, **kwargs):
+        if self.name:
+            self.slug = slugify(self.name)
+
+        super(Category, self).save(*args, **kwargs)
+
+
     def get_absolute_url(self):
         return reverse('post_recipe_by_category',
                        args=[self.slug])
+    
 
 class Recipe(models.Model):
     RATING=[

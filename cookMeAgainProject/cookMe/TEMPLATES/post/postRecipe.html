@@ -14,6 +14,7 @@
                 <a href="{% url 'post_recipe' %}">Wszystkie</a>
             </li>
             {% for c in categories %}
+            
                 <li {% if category.slug == c.slug %}class="selected"{% endif %}>
                     <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
                 </li>
@@ -22,6 +23,10 @@
     </div>
     <div id="main" class="recipe-list">
         <h1>{% if category %}{{ category.name }}{% else %}Moje Przepisy{% endif %}</h1>
+        {% if category %}
+            <a href="{% url 'delete_category' category.id %}">Usuń kategorię</a>
+            <a href="{% url 'edit_category' category.id %}">Edytuj nazwę kategorii</a>
+        {% endif %}
         {% for post in post_recipe %}
             <div class="item">
                 <a href="{{ post.get_absolute_url }}">
@@ -34,6 +39,7 @@
                 </p>
                 {{post.my_rating}}
                 <br>
+                
             </div>
         {% endfor %}     
     </div>

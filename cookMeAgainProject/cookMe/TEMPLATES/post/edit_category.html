@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Edycja kategorii{% endblock title %}
+
+{% block content %}
+    <h2>Zmień nazwę kategorii</h2>
+    
+    {% if error %}
+        <h2>{{error}}</h2>
+    {% endif %}
+    <form method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+        <br>
+        <input type="submit", value="Zmień nazwę kategorii">
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Nowa kategoria{% endblock title %}
+
+
+{% block content %}
+    <h2>Dodaj nową kategorię</h2>
+    
+    {% if error %}
+        <h2>{{error}}</h2>
+    {% endif %}
+
+    <form enctype="mulipart/form-data" method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+        <br>
+        <input type="submit", value="Dodaj kategorię">
+    </form>
+
+{% endblock content %}
+    
