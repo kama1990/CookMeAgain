@@ -7,42 +7,51 @@
 
 {% block content %}
 <p>Masz już {{ amount_of_all_recipes }} {{ amount_of_all_recipes | pluralize_pl:"przepis,przepisów,przepisy" }}</p>
+    
     <div id="sidebar">
         <h3>Kategorie</h3>
         <ul>
+            
             <li {% if not category %}class="selected"{% endif %}>
                 <a href="{% url 'post_recipe' %}">Wszystkie</a>
             </li>
+            
             {% for c in categories %}
             
                 <li {% if category.slug == c.slug %}class="selected"{% endif %}>
                     <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
                 </li>
             {% endfor %}
+            
         </ul>
     </div>
     <div id="main" class="recipe-list">
         <h1>{% if category %}{{ category.name }}{% else %}Moje Przepisy{% endif %}</h1>
         {% if category %}
-            <a href="{% url 'delete_category' category.id %}">Usuń kategorię</a>
-            <a href="{% url 'edit_category' category.id %}">Edytuj nazwę kategorii</a>
+        <br>
+            <a href="{% url 'delete_category' category.id %}" class="button">Usuń kategorię</a>
+            <a href="{% url 'edit_category' category.id %}"class="button">Edytuj nazwę kategorii</a>
+        <br>
+        <br>
         {% endif %}
-        {% for post in post_recipe %}
-            <div class="item">
-                <a href="{{ post.get_absolute_url }}">
-                    <img src="{% if post.dish_picture %}{{ post.dish_picture.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-                </a>
-                <a href="{{post.get_absolute_url}}">{{ post.title }}</a>
-                <br>
-                <p class="date">
-                Dodany {{post.create_date}}
-                </p>
-                {{post.my_rating}}
-                <br>
-                
-            </div>
-        {% endfor %}     
+
+            {% for post in post_recipe %}
+                {% if post in posts %}
+                <div class="item">
+                    <a href="{{ post.get_absolute_url }}">
+                        <img src="{% if post.dish_picture %}{{ post.dish_picture.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+                    </a>
+                    <a href="{{post.get_absolute_url}}">{{ post.title }}</a>
+                    <br>
+                    <p class="date">
+                    Dodany {{post.create_date}}
+                    </p>
+                    {{post.my_rating}}
+                    <br>
+                </div>
+                {% endif %} 
+            {% endfor %}
     </div>
     <br>
-    {% include 'pagination.html' with page=posts %}
+    {% include 'pagination.html' with page=posts %} 
 {% endblock content %}

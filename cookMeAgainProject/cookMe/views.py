@@ -33,10 +33,11 @@ def post_recipe(request, category_slug=None):
         post_recipe = post_recipe.filter(category=category)
     return render(request,
                   'post/postRecipe.html',
-                  {'category':category,
+                  {'posts':posts,
+                   'category':category,
                    'categories':categories,
                    'post_recipe':post_recipe,
-                   'amount_of_all_recipes':amount_of_all_recipes,'posts':posts})
+                   'amount_of_all_recipes':amount_of_all_recipes})
 
 def post_detail(request, id, slug):
     post = get_object_or_404(Recipe,
