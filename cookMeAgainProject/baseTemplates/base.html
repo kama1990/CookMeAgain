@@ -16,6 +16,9 @@
         <br>
         <br>
         <a href="{% url 'create_new_category' %}">Dodaj nową kategorię</a>
+        <div class="cart">
+            <a href="{% url 'rememberMe:rememberMe_detail' %}">Moje zapamiętane przepisy</a>
+        </div>
     </div>
     <div id="content">
         {% block content %}

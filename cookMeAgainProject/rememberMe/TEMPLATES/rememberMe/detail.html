@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Zapamiętane przepisy{% endblock title %}
+
+
+{% block content %}
+    <h1>Zapamiętane przepisy</h1>
+    <p class="text-right">
+        <a href="{% url 'post_recipe' %}" class="button">Szukaj dalej</a>
+    </p>
+    <table class="cart">
+        <thead>
+            <tr>
+                <th>Zdjęcie potrawy</th>
+                <th>Tytuł</th>
+               
+                <th>Usuń</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in rememberMe %}
+                {% with post=item.post %}
+                    <tr>
+                        <td>
+                            <a href="{{ post.get_absolute_url }}">
+                                <img src="{% if post.dish_picture %}{{ post.dish_picture.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+                            </a>
+                        </td>
+                        <td>{{ post.title }}</td>
+                        
+                        <td>
+                            <form action="{% url 'rememberMe:rememberMe_remove' post.id %}" method="post">
+                                <input type="submit" value="Usuń">
+                                {% csrf_token %}
+                            </form>
+                        </td>
+                    </tr>
+                {% endwith %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+    

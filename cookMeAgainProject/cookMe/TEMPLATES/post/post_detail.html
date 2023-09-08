@@ -12,6 +12,11 @@
     </h2>
     <p class="rating">{{post.my_rating}}</p>
     <p class="date">Opublikowany {{post.create_date}}</p>
+    <form action="{% url 'rememberMe:rememberMe_add' post.id %}" method="post"
+        {{ rememberMe_recipe_form }}
+        {% csrf_token %}
+        <input type="submit" value="Zapamiętaj">
+    </form>
     <h3>Przepis:</h3>{{post.desc_recipe}}
 </div>
 

@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
 from .models import Recipe, Category
 from .forms import EmailPostForm, RecipePostForm, CategoryForm
+from rememberMe.forms import RememberMeAddRecipeForm
 from cookMeAgain.settings import EMAIL_HOST_USER
 
 # Create your views here.
@@ -43,9 +44,11 @@ def post_detail(request, id, slug):
     post = get_object_or_404(Recipe,
                              id=id,
                              slug=slug)
+    rememberMe_recipe_form = RememberMeAddRecipeForm()
     return render(request,
                   'post/post_detail.html',
-                  {'post':post})
+                  {'post':post,
+                   'rememberMe_recipe_form':rememberMe_recipe_form})
 
 def post_share(request, post_id):
     post = get_object_or_404(Recipe, id=post_id)
@@ -94,8 +97,8 @@ def create_new_recipe(request):
         
 def delete_recipe(request, post_id):
     post = get_object_or_404(Recipe,
-                             id=post_id,
-                             user=request.user)
+                             id=post_id)
+                            #  user=request.user)
     post.delete()
     return render(request,
                   'post/delete.html')
@@ -103,8 +106,8 @@ def delete_recipe(request, post_id):
 def edit_recipe(request, post_id):
     # Use get() to return an object, or raise a Http404 exception if the object does not exist.
     post = get_object_or_404(Recipe,
-                            id=post_id,
-                            user=request.user)
+                            id=post_id)
+                            # user=request.user)
     if request.method == 'GET':
         form = RecipePostForm(instance=post)
         return render(request,
