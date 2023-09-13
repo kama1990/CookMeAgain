@@ -7,10 +7,11 @@
     {% if error %}
         <h1>{{error}}</h1>
     {% endif %}
-        
-    <form enctype="mulipart/form-data" method="post">
-        {{ form.as_p }}
-        {% csrf_token %}
+    <div class="formula">  
+        <form enctype="mulipart/form-data" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
         <input type="submit" value="Dodaj przepis">
-    </form>  
+        </form>  
+    </div>
 {% endblock content %}

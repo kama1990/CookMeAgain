@@ -8,9 +8,11 @@
     {% if error %}
         <h2>{{error}}</h2>
     {% endif %}
-    <form method="post">
-        {{form.as_p}}
-        {% csrf_token %}
-        <br>
-        <input type="submit", value="Zmień nazwę kategorii">
+    <div class="formula">
+        <form method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="submit", value="Zmień nazwę kategorii">
+        </form>
+    </div>
 {% endblock content %}

@@ -1,0 +1,63 @@
+<form enctype="mulipart/form-data" method="post"></form>
+<p>
+    <label for="id_category">Category:</label>
+    <select name="category" required="" id="id_category">
+        <option value="" selected="">---------</option>
+        <option value="13">Obiad</option>
+        <option value="6">Obiady dla bobasów</option>
+        <option value="14">Śniadanie moje</option>
+    </select> 
+</p>
+<p>
+    <label for="id_title">Tytuł:</label>
+    <input type="text" name="title" maxlength="100" required="" id="id_title">
+</p>
+<p>
+    <label for="id_dish_picture">Zdjęcie potrawy:</label>
+    <input type="file" name="dish_picture" accept="image/*" id="id_dish_picture">
+</p>
+<p>
+    <label for="id_my_rating">Moja ocena:</label>
+    <select name="my_rating" required="" id="id_my_rating">
+        <option value="" selected="">Wybierz ocenę</option>
+        <option value="REWELACJA">Rewelacja</option>
+        <option value="NIE DO POWTÓRZENIA">Nie do powtórzenia</option>
+        <option value="DO MODYFIKACJI">Do modyfikacji</option>
+    </select> 
+</p>
+<p>
+    <label for="id_desc_recipe">Przepis:</label>
+    <textarea name="desc_recipe" cols="40" rows="10" id="id_desc_recipe"></textarea>
+</p>
+<p>
+    <label for="id_web_recipe">Strona www:</label>
+    <input type="url" name="web_recipe" maxlength="200" id="id_web_recipe">
+</p>
+<p>
+    <label for="id_pic_recipe">Zdjęcie przepisu:</label>
+    <input type="file" name="pic_recipe" accept="image/*" id="id_pic_recipe">   
+</p>  
+<p>
+    <label for="id_comment">Moje uwagi:</label>
+    <textarea name="comment" cols="40" rows="10" id="id_comment"></textarea>
+</p>
+<p>
+    <label for="id_main_components">Główne składniki:</label>
+    <textarea name="main_components" cols="40" rows="10" id="id_main_components"></textarea>
+</p>
+        <input type="hidden" name="csrfmiddlewaretoken" value="seDxfnWIevuPc9pNMK3rv10mAz4wsiEyNLtL2zu6TIjsp75YxkrLIsAxRGpZKoDR">
+        <input type="submit" value="Dodaj przepis">
+    <input type="submit" value="Dodaj przepis">
+</form>  
+
+form p label, form p input {
+    float:left;
+    clear:both;
+}
+/* changed */
+form p label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+    width: 25%;
+    margin-top: 6px;
+}

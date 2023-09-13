@@ -10,12 +10,13 @@
         <h2>{{error}}</h2>
     {% endif %}
 
-    <form enctype="mulipart/form-data" method="post">
-        {{form.as_p}}
-        {% csrf_token %}
-        <br>
-        <input type="submit", value="Dodaj kategorię">
-    </form>
+    <div class="formula">
+        <form enctype="mulipart/form-data" method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="submit", value="Dodaj kategorię">
+        </form>
+    </div>
 
 {% endblock content %}
     
