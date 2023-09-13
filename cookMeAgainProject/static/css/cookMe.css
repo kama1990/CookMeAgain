@@ -90,6 +90,15 @@ form p input[type=url] {
     border-radius: 4px;
     box-sizing: border-box;
 }
+form p input[type=password] {
+    width: 90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 textarea {
     width: 90%;
     padding: 12px 20px;
@@ -113,7 +122,13 @@ ul.errorlist {
    margin:0 0 0 10px;
    padding:10px 0;
 }
-
+.error1 {
+    color:#ff0000;
+    clear:both;
+    font-size:20px;
+    margin:0 0 0 10px;
+    padding:10px 0;
+ }
 
 #header {
     padding:10px 100px;
