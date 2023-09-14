@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Wylogowanie{% endblock title %}
+    
+
+{% block content %}
+    <h2>Zostałeś pomyślnie wylogowany. Kliknij poniższy przycisk aby zalogować się ponownie</h2>
+    <p class=><a href="{% url 'login' %}" class="button">Zaloguj się</a></p>
+{% endblock content %}
+    

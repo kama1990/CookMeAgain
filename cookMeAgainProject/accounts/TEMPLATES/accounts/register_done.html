@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Witaj w swoim przepiśniku{% endblock title %}
+
+{% block content %}
+    <h1>Witaj {{ new_user.first_name}} ! </h1>
+    <p>
+        Twoje konto zostało założone. Możesz się <a href="{% url 'login' %}">zalogować</a>
+    </p>
+{% endblock content %}
+    
+    

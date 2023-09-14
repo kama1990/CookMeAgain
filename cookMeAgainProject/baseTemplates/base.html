@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Moje Przepisy{% endblock title %}</title>
+    <title>{% block title %}{% endblock title%}</title>
     <link href="{% static 'css/cookMe.css' %}" rel="stylesheet">
 </head>
 <body>
     <div id="header">
+        {% if request.user.is_authenticated %}
         <a href="{% url 'post_recipe' %}">Moje przepisy</a>
+        <h5><a href="{% url 'logout' %}">Wyloguj się</a></h5>
     </div>
     <div id="subheader">
         <a href="{% url 'create_new_recipe' %}">Dodaj nowy przepis</a>
@@ -17,9 +19,14 @@
         <br>
         <a href="{% url 'create_new_category' %}">Dodaj nową kategorię</a>
         <div class="cart">
+            <h3>Zalogowany jako {{user.username }}</h3>
             <a href="{% url 'rememberMe:rememberMe_detail' %}">Moje zapamiętane przepisy</a>
         </div>
     </div>
+        {% else %}
+        <h3><a href="{% url 'register' %}">Zarejestruj się</a></h3>
+        <h3><a href="{% url 'login' %}">Zaloguj się się</a></h3>
+        {% endif %}
     <div id="content">
         {% block content %}
         {% endblock content %}

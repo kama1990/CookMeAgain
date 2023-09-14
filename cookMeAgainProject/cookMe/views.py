@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 from .models import Recipe, Category
 from .forms import EmailPostForm, RecipePostForm, CategoryForm
 from rememberMe.forms import RememberMeAddRecipeForm
@@ -10,6 +11,7 @@ from cookMeAgain.settings import EMAIL_HOST_USER
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def post_recipe(request, category_slug=None):
     category = None
     categories = Category.objects.all()
@@ -40,6 +42,7 @@ def post_recipe(request, category_slug=None):
                    'post_recipe':post_recipe,
                    'amount_of_all_recipes':amount_of_all_recipes})
 
+
 def post_detail(request, id, slug):
     post = get_object_or_404(Recipe,
                              id=id,
@@ -50,6 +53,7 @@ def post_detail(request, id, slug):
                   {'post':post,
                    'rememberMe_recipe_form':rememberMe_recipe_form})
 
+@login_required
 def post_share(request, post_id):
     post = get_object_or_404(Recipe, id=post_id)
     sent = False
@@ -75,6 +79,7 @@ def post_share(request, post_id):
                    'form':form,
                    'sent':sent})
 
+@login_required
 def create_new_recipe(request):
     if request.method == 'GET': # When used GET method eg. web loading, create empty creation form
         return render(request,
@@ -94,7 +99,8 @@ def create_new_recipe(request):
                           'post/create_new_recipe.html',
                           {'form': RecipePostForm(),
                            'error':error})
-        
+
+@login_required        
 def delete_recipe(request, post_id):
     post = get_object_or_404(Recipe,
                              id=post_id)
@@ -103,6 +109,7 @@ def delete_recipe(request, post_id):
     return render(request,
                   'post/delete.html')
 
+@login_required
 def edit_recipe(request, post_id):
     # Use get() to return an object, or raise a Http404 exception if the object does not exist.
     post = get_object_or_404(Recipe,
@@ -128,6 +135,7 @@ def edit_recipe(request, post_id):
                            'form':form,
                            'error':error})
 
+@login_required
 def create_new_category(request):
     if request.method == 'GET':
         return render(request,
@@ -151,7 +159,8 @@ def create_new_category(request):
                       'post/create_new_category.html',
                       {'form':CategoryForm(),
                        'error':error})
-    
+
+@login_required    
 def delete_category(request, category_id):
     category = get_object_or_404(Category,
                                  id=category_id)
@@ -159,6 +168,7 @@ def delete_category(request, category_id):
     #   later add possiblity to ask one more time - are you sure to delete category
     return redirect('post_recipe') 
 
+@login_required
 def edit_category(request, category_id):
     category = get_object_or_404(Category,
                                  id=category_id)

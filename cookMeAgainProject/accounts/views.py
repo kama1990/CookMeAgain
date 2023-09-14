@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from .form import LoginForm
+from django.contrib.auth import authenticate, login, logout
+from .forms import LoginForm, UserRegistrationForm
 # Create your views here.
 
 def user_login(request):
@@ -17,7 +17,7 @@ def user_login(request):
                 # we need to check if account is active
                 if user.is_active:
                     login(request, user)
-                    return redirect('postRecipe')
+                    return redirect('post_recipe')
             else:
                 error = 'Użytkownik nie jest aktywny bądź wprowadzono niepoprawne dane do logowania. Spróbuj ponownie'
                 return render(request,
@@ -36,5 +36,27 @@ def user_login(request):
                       'accounts/login.html',
                       {'form':form})
 
-def user_logout():
-    pass
+def user_logout(request):
+    logout(request)
+    return render(request,
+                  'accounts/logout.html')
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            # We need to create new object
+            # but we cannot save it
+            new_user = user_form.save(commit=False)
+            # we need to set password
+            new_user.set_password(
+                user_form.cleaned_data['password'])
+            # we need to save user
+            new_user.save()
+            return render(request,
+                          'accounts/register_done.html',
+                          {'new_user':new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request,
+                  'accounts/register.html',{'user_form':user_form})
